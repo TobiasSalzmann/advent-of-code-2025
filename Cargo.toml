@@ -1,0 +1,24 @@
+[package]
+name = "advent-of-code-2025"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+dotenv = "0.15.0"
+itertools = "0.13.0"
+tempfile = "3.14.0"
+num = "0.4.3"
+pathfinding = "4.11.0"
+rustc-hash = "2.0.0"
+rayon = "1.10.0"
+array2d = "0.3.2"
+clap = { version = "4.5.21", features = ["derive", "env"] }
+bit-set = "0.8.0"
+prse = "1.2.1"
+lib-advent-macro = { path = "./lib-advent-macro" }
+regex = "1.11.1"
+lazy_static = "1.5.0"
+
+[profile.release]
+debug = true
+strip = false
