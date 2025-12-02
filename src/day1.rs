@@ -1,7 +1,4 @@
 use crate::util::AdventHelper;
-use clap::builder::TypedValueParser;
-use itertools::Itertools;
-use std::str::FromStr;
 
 pub fn main() {
     let advent = AdventHelper::from_file_name(file!());
@@ -36,24 +33,23 @@ fn part1(lines: &[i32]) -> usize {
 fn part2(lines: &[i32]) -> usize {
     let mut count = 0;
     let mut sum = 50;
-    lines.iter()
-        .for_each(|it| {
-            if sum == 0 && *it < 0 {
-                sum = 100
-            }
-            sum = sum + it;
-            while sum > 100 {
-                sum -= 100;
-                count += 1
-            }
-            while(sum < 0) {
-                sum += 100;
-                count += 1
-            }
-            if sum.rem_euclid(100) == 0 {
-                count += 1;
-                sum = 0;
-            }
-        });
+    lines.iter().for_each(|it| {
+        if sum == 0 && *it < 0 {
+            sum = 100
+        }
+        sum += it;
+        while sum > 100 {
+            sum -= 100;
+            count += 1
+        }
+        while (sum < 0) {
+            sum += 100;
+            count += 1
+        }
+        if sum.rem_euclid(100) == 0 {
+            count += 1;
+            sum = 0;
+        }
+    });
     count
 }

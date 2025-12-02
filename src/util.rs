@@ -108,6 +108,16 @@ impl AdventHelper {
             .collect_vec()
     }
 
+    pub fn parse_sequence<T: FromStr + Clone>(&self, separator: &str) -> Vec<T>
+    where
+        <T as FromStr>::Err: Debug,
+    {
+        self.parse_sequences_from_strings(separator)
+            .first()
+            .unwrap()
+            .clone()
+    }
+
     pub fn parse_tuples_from_strings<T, U>(&self, separator: &str) -> Vec<U>
     where
         T: FromStr,
@@ -158,15 +168,13 @@ impl AdventHelper {
 
 pub trait GridAccess<T> {
     fn get_i32(&self, x: i32, y: i32) -> Option<&T>;
-    
 }
-impl <T> GridAccess<T> for Array2D<T> {
+impl<T> GridAccess<T> for Array2D<T> {
     fn get_i32(&self, x: i32, y: i32) -> Option<&T> {
         if x < 0 || y < 0 {
-           return None
-        } 
+            return None;
+        }
         self.get(x as usize, y as usize)
-        
     }
 }
 
@@ -443,7 +451,7 @@ impl Bounds {
 
 pub enum Part {
     Part1,
-    Part2
+    Part2,
 }
 
 #[cfg(test)]
