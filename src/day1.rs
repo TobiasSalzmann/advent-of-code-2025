@@ -42,7 +42,7 @@ fn part2(lines: &[i32]) -> usize {
             sum -= 100;
             count += 1
         }
-        while (sum < 0) {
+        while sum < 0 {
             sum += 100;
             count += 1
         }
