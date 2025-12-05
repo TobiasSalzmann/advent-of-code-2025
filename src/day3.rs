@@ -9,16 +9,14 @@ pub fn main() {
 }
 
 fn part(banks: &[Vec<i32>], length: usize) -> i64 {
-    banks.iter()
-        .map(|it| joltage(it, length))
-        .sum()
+    banks.iter().map(|it| joltage(it, length)).sum()
 }
 
 fn joltage(bank: &[i32], length: usize) -> i64 {
     let idx = find_first_max_idx(&bank[0..bank.len() - (length - 1)]);
 
     if length == 1 {
-         bank[idx] as i64
+        bank[idx] as i64
     } else {
         10i64.pow(length as u32 - 1) * bank[idx] as i64 + joltage(&bank[idx + 1..], length - 1)
     }

@@ -19,6 +19,25 @@ where
     contents.lines().map(|s| s.parse().unwrap()).collect()
 }
 
+fn parse_from_strings_split<T: FromStr, U: FromStr>(file_path: &str) -> (Vec<T>, Vec<U>)
+where
+    <T as FromStr>::Err: Debug,
+    <U as FromStr>::Err: Debug,
+{
+    let contents = fs::read_to_string(file_path).expect("File does not exists");
+    let ts: Vec<T> = contents
+        .lines()
+        .take_while(|it| !it.is_empty())
+        .map(|it| it.parse().unwrap())
+        .collect_vec();
+    let us: Vec<U> = contents
+        .lines()
+        .skip(ts.len() + 1)
+        .map(|it| it.parse().unwrap())
+        .collect_vec();
+    (ts, us)
+}
+
 pub fn parse_strings(file_path: &str) -> Vec<String> {
     let contents = fs::read_to_string(file_path).expect("File does not exists");
     contents.lines().map(|s| s.to_string()).collect()
@@ -91,6 +110,14 @@ impl AdventHelper {
         <T as FromStr>::Err: Debug,
     {
         parse_from_strings(&self.input_file())
+    }
+
+    pub fn parse_from_strings_split<T: FromStr, U: FromStr>(&self) -> (Vec<T>, Vec<U>)
+    where
+        <T as FromStr>::Err: Debug,
+        <U as FromStr>::Err: Debug,
+    {
+        parse_from_strings_split(&self.input_file())
     }
 
     pub fn parse_sequences_from_strings<T: FromStr>(&self, separator: &str) -> Vec<Vec<T>>

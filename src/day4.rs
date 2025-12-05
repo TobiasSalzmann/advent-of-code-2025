@@ -1,5 +1,5 @@
-use array2d::Array2D;
 use crate::util::{AdventHelper, GridAccess};
+use array2d::Array2D;
 
 pub fn main() {
     let advent = AdventHelper::from_file_name(file!());
@@ -32,8 +32,21 @@ fn accessible(grid: &Array2D<char>) -> Vec<(usize, usize)> {
     for (x, y) in grid.indices_row_major() {
         let mut num_rolls = 0;
         if let Some('@') = grid.get_i32(x as i32, y as i32) {
-            for (dx, dy) in [(1, 0), (0, 1), (-1, 0), (0, -1), (-1, -1), (-1, 1), (1, -1), (1, 1)].iter() {
-                if let Some(c) = grid.get_i32(x as i32 + dx, y as i32 + dy) && *c == '@' {
+            for (dx, dy) in [
+                (1, 0),
+                (0, 1),
+                (-1, 0),
+                (0, -1),
+                (-1, -1),
+                (-1, 1),
+                (1, -1),
+                (1, 1),
+            ]
+            .iter()
+            {
+                if let Some(c) = grid.get_i32(x as i32 + dx, y as i32 + dy)
+                    && *c == '@'
+                {
                     num_rolls += 1
                 }
             }
