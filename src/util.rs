@@ -172,6 +172,16 @@ impl AdventHelper {
         Array2D::from_rows(&self.parse_grid()).unwrap()
     }
 
+    pub fn parse_grid_2d_fill(&self, fill: char) -> Array2D<char> {
+        let mut vec = self.parse_grid();
+        let length = vec.iter().map(|row| row.len()).max().unwrap();
+        vec.iter_mut().for_each(|row| row.extend(std::iter::repeat(fill).take(length - row.len())));
+        for row in vec.iter_mut() {
+            row.extend(std::iter::repeat(fill).take(length - row.len()));
+        }
+        Array2D::from_rows(&vec).unwrap()
+    }
+
     pub fn parse_from_grid(&self) -> Array2D<i32> {
         let lines: Vec<String> = parse_from_strings(&self.input_file());
         let vec: Vec<Vec<i32>> = lines
