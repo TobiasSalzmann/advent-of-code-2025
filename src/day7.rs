@@ -1,4 +1,5 @@
 use array2d::Array2D;
+use bit_set::BitSet;
 use crate::util::AdventHelper;
 
 pub fn main() {
@@ -9,17 +10,17 @@ pub fn main() {
 }
 
 fn part1(grid: &Array2D<char>) -> usize {
-    let mut beams = vec![false; grid.num_columns()];
+    let mut beams = BitSet::new();
     let mut count = 0;
     for row in grid.rows_iter() {
         row.enumerate().for_each(|(i, it)| {
             if *it == 'S' {
-                beams[i] = true
+                beams.insert(i);
             }
-            if *it == '^' && beams[i] {
-                beams[i] = false;
-                beams[i-1] = true;
-                beams[i+1] = true;
+            if *it == '^' && beams.contains(i) {
+                beams.remove(i);
+                beams.insert(i-1);
+                beams.insert(i + 1);
                 count += 1
             }
         });
