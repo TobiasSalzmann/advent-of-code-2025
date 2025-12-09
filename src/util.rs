@@ -175,7 +175,8 @@ impl AdventHelper {
     pub fn parse_grid_2d_fill(&self, fill: char) -> Array2D<char> {
         let mut vec = self.parse_grid();
         let length = vec.iter().map(|row| row.len()).max().unwrap();
-        vec.iter_mut().for_each(|row| row.extend(std::iter::repeat(fill).take(length - row.len())));
+        vec.iter_mut()
+            .for_each(|row| row.extend(std::iter::repeat(fill).take(length - row.len())));
         for row in vec.iter_mut() {
             row.extend(std::iter::repeat(fill).take(length - row.len()));
         }

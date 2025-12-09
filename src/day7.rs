@@ -1,6 +1,6 @@
+use crate::util::AdventHelper;
 use array2d::Array2D;
 use bit_set::BitSet;
-use crate::util::AdventHelper;
 
 pub fn main() {
     let advent = AdventHelper::from_file_name(file!());
@@ -19,7 +19,7 @@ fn part1(grid: &Array2D<char>) -> usize {
             }
             if *it == '^' && beams.contains(i) {
                 beams.remove(i);
-                beams.insert(i-1);
+                beams.insert(i - 1);
                 beams.insert(i + 1);
                 count += 1
             }
@@ -37,8 +37,8 @@ fn part2(grid: &Array2D<char>) -> usize {
             if *it == '^' {
                 let count = beams[i];
                 beams[i] = 0;
-                beams[i-1] += count;
-                beams[i+1] += count;
+                beams[i - 1] += count;
+                beams[i + 1] += count;
             }
         });
     }

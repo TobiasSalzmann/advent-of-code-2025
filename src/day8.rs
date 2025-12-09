@@ -1,5 +1,4 @@
 use std::str::FromStr;
-use array2d::Array2D;
 use bit_set::BitSet;
 use itertools::Itertools;
 use prse::Parse;
@@ -25,7 +24,7 @@ fn part1(points: &[Point3], cutoff: usize) -> usize {
     let mut clusters: Vec<BitSet> = vec![];
     pairs = pairs.into_iter().take(cutoff).collect();
     for (i, j) in pairs {
-        if let Some((set_i_idx, set_i)) = clusters.iter().find_position(|it| it.contains(i))
+        if let Some((set_i_idx, _set_i)) = clusters.iter().find_position(|it| it.contains(i))
             && let Some((set_j_idx, set_j)) = clusters.iter().find_position(|it| it.contains(j)) {
             if set_i_idx == set_j_idx {
                 continue
@@ -55,7 +54,7 @@ fn part2(points: &[Point3]) -> i64 {
     pairs.sort_by_key(|(i, j)| (points[*i].x - points[*j].x).pow(2) + (points[*i].y - points[*j].y).pow(2) + (points[*i].z - points[*j].z).pow(2));
     let mut clusters: Vec<BitSet> = vec![];
     for (i, j) in pairs {
-        if let Some((set_i_idx, set_i)) = clusters.iter().find_position(|it| it.contains(i))
+        if let Some((set_i_idx, _set_i)) = clusters.iter().find_position(|it| it.contains(i))
             && let Some((set_j_idx, set_j)) = clusters.iter().find_position(|it| it.contains(j)) {
             if set_i_idx == set_j_idx {
                 continue
