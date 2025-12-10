@@ -11,6 +11,7 @@ mod day8;
 mod day9;
 #[allow(dead_code)]
 mod util;
+mod day10;
 
 extern crate core;
 extern crate dotenv;
@@ -71,6 +72,7 @@ fn run(day: i32, time: bool) {
         7 => day7::main(),
         8 => day8::main(),
         9 => day9::main(),
+        10 => day10::main(),
         other => {
             println!("Day {} not yet implemented 😅", other)
         }
